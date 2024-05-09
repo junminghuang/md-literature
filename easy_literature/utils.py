@@ -153,22 +153,22 @@ def get_update_content(m, note_file, pdfs_path, proxy, gproxy_mode):
                             if not os.path.exists(pdf_path):
                                 get_paper_pdf_from_paperid(literature_id, pdf_path, proxy=proxy)
                 if os.path.exists(pdf_path):
-                    replaced_literature = "- **{}**. {} et.al. **{}**, **{}**, **Number of Citations: **{}, ([pdf]({}))([link]({})).".format(
-                                        bib['title'], bib["author"].split(" and ")[0], bib['journal'], 
+                    replaced_literature = "- **{}**. {}, **{}**, **{}**, **Number of Citations: **{}, ([pdf]({}))([link]({})).".format(
+                                        bib['title'], bib["author"], bib['journal'], 
                                         bib['year'], bib['cited_count'], os.path.relpath(pdf_path, note_file).split('/',1)[-1], 
                                         bib['url'])
                 else:
                     logger.info("Can not find a downloading source for literature id {}. You may need to manually download this paper, a template has been generated in the markdown file. Put the pdf file in the folder you specified just now and add its name in the '(pdf)' of your markdown entry.".format(literature_id))
-                    replaced_literature = "- **{}**. {} et.al. **{}**, **{}**, **Number of Citations: **{}, ([pdf]({}))([link]({})).".format(
-                                            bib['title'], bib["author"].split(" and ")[0], bib['journal'], 
+                    replaced_literature = "- **{}**. {}, **{}**, **{}**, **Number of Citations: **{}, ([pdf]({}))([link]({})).".format(
+                                            bib['title'], bib["author"], bib['journal'], 
                                             bib['year'], bib['cited_count'], f'{pdfs_path}/your_pdf_name.pdf', bib['url']
                                             )
                 replace_dict[literature] = replaced_literature
             except:
                 
                     logger.info("Can not find a downloading source for literature id {}. You may need to manually download this paper, a template has been generated in the markdown file. Put the pdf file in the folder you specified just now and add its name in the '(pdf)' of your markdown entry.".format(literature_id))
-                    replaced_literature = "- **{}**. {} et.al. **{}**, **{}**, **Number of Citations: **{}, ([pdf]({}))([link]({})).".format(
-                                            bib['title'], bib["author"].split(" and ")[0], bib['journal'], 
+                    replaced_literature = "- **{}**. {}, **{}**, **{}**, **Number of Citations: **{}, ([pdf]({}))([link]({})).".format(
+                                            bib['title'], bib["author"], bib['journal'], 
                                             bib['year'], bib['cited_count'], f'{pdfs_path}/your_pdf_name.pdf', bib['url']
                                             )
                     replace_dict[literature] = replaced_literature
