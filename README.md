@@ -43,7 +43,9 @@ ___
 4. List the formated papers titles in your markdown note file according to the Section 4 below (Recognition Rules). e.g.,<br>
   \- {{BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding.}}<br>
   \- {{Xlnet: Generalized autoregressive pretraining for language understanding.}}<br>
-  **(pay attention to the space after ‘\-’)** 
+  **(pay attention to the space after ‘\-’)** <br>
+**If its PDF is already downloaded, drag it into {{ }} after the paper title**. For example <br>
+  \- {{Xlnet: Generalized autoregressive pretraining for language understanding. \[pdf\](download.pdf)}}
 5. Create a folder to store the downloaded pdfs (e.g., `PDFs/`).
 6. Run `easyliter -i <path to your md file> -o <path to your pdf folder>`. 
 <br> (Replace `<path to your md file>` with the actual path to your markdown note file, `<path to your pdf folder>` with the actual path to your pdf folder)
@@ -61,7 +63,10 @@ ___
 4. 根据下面第4节（识别规则）在您的 markdown 笔记文件中列出格式化的论文标题。例如：<br>
 \- {{BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding.}}<br>
   \- {{Xlnet: Generalized autoregressive pretraining for language understanding.}}<br>
-  **(注意‘\-’后的空格)** 
+  **(注意‘\-’后的空格)** <br>
+**如果已经下载了PDF文件，直接拖到 {{ }} 里，论文标题后面**。例如 <br>
+  \- {{Xlnet: Generalized autoregressive pretraining for language understanding. \[pdf\](download.pdf)}}
+
 5. 创建一个文件夹来存储下载的 pdf 文件（例如，`PDFs/`）。
 6. 运行 `easyliter -i <您的 md 文件路径> -o <您的 pdf 文件夹路径>`。
 <br>**注意**：将 `<您的 md 文件路径>` 替换为您 markdown 笔记文件的实际路径，将 `<您的 pdf 文件夹路径>` 替换为您 pdf 文件夹的实际路径。
