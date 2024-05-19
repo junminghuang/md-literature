@@ -112,7 +112,31 @@ def get_update_content(m, note_file, pdfs_path, proxy, gproxy_mode):
     for literature in tqdm(m):
         pdf = classify_identifier(literature)
         
-        literature_id = literature.split('{')[-1].split('}')[0]
+        literature_id = literature.split('{{')[-1].split('}}', 1)[0]
+
+        # Junming: detect the PDF file if attached
+        attached_pdf = None
+        if '[' in literature_id:
+            # HGNN-QSSA [entropy-24-01782.pdf](../../../../Mac/Downloads/entropy-24-01782.pdf)
+            import re
+            from pathlib import Path
+            match = re.match(r'^(.*?)\s*\[.*\]\s*\((.*?)\).*', literature_id)
+            if match:
+                literature_id = match.group(1).strip()  # string_before_bracket
+                attached_pdf = match.group(2).strip()  # string_within_brackets
+                logger.info(attached_pdf)
+                try:
+                    attached_pdf = Path(attached_pdf).resolve()
+                    if attached_pdf.is_file():
+                        logger.info(f"literature [{literature_id}] has an attached PDF file [{attached_pdf}].")
+                    else:
+                        logger.info("Detected link but no PDF file found.")
+                        attached_pdf = None
+                except Exception as error:
+                    logger.info(f"{type(error)}: {error}")
+                    attached_pdf = None
+        # Junming
+
         bib = get_paper_info_from_paperid(literature_id, proxy=proxy, gproxy_mode=gproxy_mode)
         
         if bib:
@@ -131,7 +155,14 @@ def get_update_content(m, note_file, pdfs_path, proxy, gproxy_mode):
                 pdf_path = os.path.join(pdfs_path, pdf_name)
                 
                 logger.info(f"The pdf path to be saved: {pdf_path}")
-                if pdf:
+                # Junming: move the downloaded PDF file to the specified path
+                if attached_pdf is not None:
+                    # move attached_pdf to pdf_path
+                    logger.info(f"Simply move the attached pdf [{attached_pdf}] to [{pdf_path}]")
+                    attached_pdf.rename(pdf_path)
+                elif pdf:
+                # if pdf:
+                # Junming
                     id_type = classify(literature_id)
                     if id_type == "title":
                         for pattern_str in [r'10\.(?!1101)[0-9]{4}/', r'10\.1101/', r'[0-9]{2}[0-1][0-9]\.[0-9]{3,}', r'.*/[0-9]{2}[0-1][0-9]{4}']:
